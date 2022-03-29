@@ -9,18 +9,19 @@ namespace UML_2_PizzaStore
     {
 
         public List<Pizza> pizzaList = new List<Pizza>();
-     
+
         public void PizzaList()
         {
             Pizza pizza1 = new Pizza(1, "Hawaii", 85, "Ham, Pineapple, Cheese");
             Pizza pizza2 = new Pizza(2, "Veggie", 80, "Bellpepper, Olives, Mushrooms");
             Pizza pizza3 = new Pizza(3, "House Special", 90, "Kebab, Chili, Cheese");
             Pizza pizza4 = new Pizza(4, "Capricosa", 60, "Mushrooms, Ham, Cheese");
-            
+
             pizzaList.Add(pizza1);
             pizzaList.Add(pizza2);
             pizzaList.Add(pizza3);
             pizzaList.Add(pizza4);
+
         }
 
         public void UserMenu()
@@ -40,10 +41,26 @@ namespace UML_2_PizzaStore
 
         public void ShowFullMenu()
         {
+            string userChoice;
+            Console.WriteLine("MENU");
+            Console.WriteLine("~~~~");
+           
             foreach (Pizza pizza in pizzaList)
             {
+                Console.WriteLine("______________________________________________________________________");
                 Console.WriteLine($"{pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
             }
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Type 'y' To Show Options");
+            userChoice = Console.ReadLine();
+
+            if (userChoice == "y")
+            {
+                Console.Clear();
+                UserMenu();
+            }
+
         }
 
         public void CreatePizza()
@@ -53,7 +70,6 @@ namespace UML_2_PizzaStore
             string toppings;
             int numberOfPizza;
 
-            
             Console.WriteLine($"CREATE PIZZA");
             Console.WriteLine($"____________");
             Console.WriteLine($"Name Your Pizza:");
@@ -64,16 +80,27 @@ namespace UML_2_PizzaStore
             Console.WriteLine();
             Console.WriteLine($"Add Your Toppings. Please seperate toppings with ',':");
             toppings = Console.ReadLine();
-            Console.WriteLine($"You Have Now Created Your Pizza! Your Pizza Has Been Assigned Number {pizzaList.Count+1}");
+            Console.WriteLine($"You Have Now Created Your Pizza! Your Pizza Has Been Assigned Number {pizzaList.Count + 1}");
             numberOfPizza = pizzaList.Count + 1;
             Pizza pizza = new Pizza(numberOfPizza, nameOfPizza, priceOfPizza, toppings);
             pizzaList.Add(pizza);
-             
+
+            string userChoice;
+            Console.WriteLine();
+            Console.WriteLine();
+            Console.WriteLine("Type 'y' To Return To Option Menu");
+            userChoice = Console.ReadLine();
+
+            if (userChoice == "y")
+            {
+                Console.Clear();
+                UserMenu();
+            }
         }
 
-       /* public void SearchForPizza(string searchPhrase)
+        public void SearchForPizza(string searchPhrase)
         {
-            var matchingPizzas = pizzaList.Where(p => p.NameOfPizza.Contains(searchPhrase)).ToList();
+            var matchingPizzas = pizzaList.Where(pizza => pizza.NameOfPizza.Contains(searchPhrase)).ToList();
             foreach (Pizza pizza in matchingPizzas)
             {
                 Console.WriteLine($"{pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
@@ -86,10 +113,11 @@ namespace UML_2_PizzaStore
             foreach (Pizza pizza in matchingPizzas)
             {
                 Console.WriteLine($"{pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
-            } */
+            }
         }
-    
+
     }
+}
 
 
     

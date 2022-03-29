@@ -6,8 +6,9 @@ namespace UML_2_PizzaStore
     {
         MenuCatalog _menuCatalog = new MenuCatalog();
         
-        public static void RunApp()
+        public void RunApp()
         {
+                _menuCatalog.PizzaList();
                 Console.WriteLine("Welcome To The Menu!");
                 Console.WriteLine();
                 Console.WriteLine("Please Select An Option!");
@@ -29,8 +30,15 @@ namespace UML_2_PizzaStore
                 switch (userinput)
                 {
                     case "1":
-                        menucatalog.PizzaList();
-                        menucatalog.CreatePizza();
+                        try
+                        {
+                            Console.Clear();
+                            menucatalog.CreatePizza();
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine("No Fastfood Created");
+                        }
                         break;
 
                     case "2":
@@ -54,9 +62,6 @@ namespace UML_2_PizzaStore
                         break;
 
                 }
-                
-                Console.WriteLine("Please Select New Option");
-                userinput = Console.ReadLine();
                  
             }
             
