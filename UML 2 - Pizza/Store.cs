@@ -11,19 +11,9 @@ namespace UML_2_PizzaStore
 
         public void RunApp()
         {
-            Console.WriteLine("Welcome To The Menu!");
-            Console.WriteLine();
-            Console.WriteLine("Please Select An Option!");
-            Console.WriteLine();
-            Console.WriteLine("1. Create A Pizza!");
-            Console.WriteLine("2. Show Full Menu!");
-            Console.WriteLine("3. Search For A Pizza By Number!");
-            Console.WriteLine("4. Search For A Pizza By Name!");
-            Console.WriteLine("5. Remove Pizza From Menu!");
-            Console.WriteLine("To Close Program Press 'x'");
-
-            var userinput = Console.ReadLine();
             MenuCatalog menuCatalog = new MenuCatalog();
+            menuCatalog.UserMenu();
+            var userinput = Console.ReadLine();
             menuCatalog.PizzaList();
 
             while (true)
@@ -33,7 +23,14 @@ namespace UML_2_PizzaStore
                 {
                     case "1":
                         Console.Clear();
-                        menuCatalog.CreatePizza();
+                        try
+                        {
+                            menuCatalog.CreatePizza();
+                        }
+                        catch(Exception)
+                        {
+                            Console.WriteLine($"No Pizza Was Created");
+                        }
                         break;
 
                     case "2":
@@ -43,9 +40,11 @@ namespace UML_2_PizzaStore
 
                     case "3":
                         Console.Clear();
-                        Console.WriteLine("Please Enter A Number To Display Specific Pizza:");
-                        int searchNumber = Convert.ToInt32(Console.ReadLine());
-                        menuCatalog.SearchForPizzaNumber(searchNumber);
+                        Console.WriteLine("Choose The Number Of The Pizza You Want To Update!");
+                        Console.WriteLine();
+                        menuCatalog.ShowFullMenu();
+                        int numberOfPizza = Convert.ToInt32(Console.ReadLine());
+                        menuCatalog.UpdatePizza(numberOfPizza);
                         break;
 
                     case "4":
@@ -56,6 +55,18 @@ namespace UML_2_PizzaStore
                         break;
 
                     case "5":
+                        Console.Clear();
+                        Console.WriteLine("Please Choose The Number Of The Pizza You Want To Remove From The Menu:");
+                        menuCatalog.ShowFullMenu();
+                        int pizzaNumber = Convert.ToInt32(Console.ReadLine());
+                        menuCatalog.RemovePizza(pizzaNumber);
+                        break;
+
+                    case "6":
+                
+                        break;
+
+                    case "7":
                         break;
 
                     case "x":
@@ -66,19 +77,15 @@ namespace UML_2_PizzaStore
                         break;
 
                 }
-
-                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                
                 Console.WriteLine();
-                Console.WriteLine("Please Select New Option!");
                 Console.WriteLine();
-                Console.WriteLine("1. Create A Pizza!");
-                Console.WriteLine("2. Show Full Menu!");
-                Console.WriteLine("3. Search For A Pizza By Number!");
-                Console.WriteLine("4. Search For A Pizza By Name!");
-                Console.WriteLine("5. Remove Pizza From Menu!");
-                Console.WriteLine("To Close Program Press 'x'");
+                Console.WriteLine("Press 'o' To Return To Menu!");
+                if (userinput == "o")
+                {
+                    menuCatalog.UserMenu();
+                }
                 userinput = Console.ReadLine();
-
 
             }
 

@@ -30,9 +30,9 @@ namespace UML_2_PizzaStore
         #endregion
 
         #region Run App
-        
 
-   
+
+
         #endregion
 
         #region UserMenu
@@ -43,11 +43,22 @@ namespace UML_2_PizzaStore
             Console.WriteLine();
             Console.WriteLine("Please Select An Option!");
             Console.WriteLine();
+            Console.WriteLine("PIZZA");
+            Console.WriteLine();
             Console.WriteLine("1. Create A Pizza!");
             Console.WriteLine("2. Show Full Menu!");
-            Console.WriteLine("3. Search For A Pizza By Number!");
+            Console.WriteLine("3. Update A Pizza!");
             Console.WriteLine("4. Search For A Pizza By Name!");
             Console.WriteLine("5. Remove Pizza From Menu!");
+            Console.WriteLine();
+            Console.WriteLine("COSTUMERS");
+            Console.WriteLine();
+            Console.WriteLine("6. Create A Costumer!");
+            Console.WriteLine("7. Show All Customers!");
+            Console.WriteLine("8. Update Customer Info!");
+            Console.WriteLine("9. Search For A Customer!");
+            Console.WriteLine("10. Remove A Customer!");
+            Console.WriteLine();
             Console.WriteLine("To Close Program Press 'x'");
         }
         #endregion
@@ -57,7 +68,7 @@ namespace UML_2_PizzaStore
         {
             Console.WriteLine("MENU");
             Console.WriteLine("~~~~");
-           
+
             foreach (Pizza pizza in pizzaList)
             {
                 Console.WriteLine("______________________________________________________________________");
@@ -74,20 +85,31 @@ namespace UML_2_PizzaStore
             string toppings;
             int numberOfPizza;
 
-            Console.WriteLine($"CREATE PIZZA");
-            Console.WriteLine($"____________");
-            Console.WriteLine($"Name Your Pizza:");
-            nameOfPizza = Console.ReadLine();
-            Console.WriteLine();
-            Console.WriteLine($"Set Price For Pizza::");
-            priceOfPizza = Convert.ToInt32(Console.ReadLine());
-            Console.WriteLine();
-            Console.WriteLine($"Add Your Toppings. Please seperate toppings with ',':");
-            toppings = Console.ReadLine();
-            Console.WriteLine($"You Have Now Created Your Pizza! Your Pizza Has Been Assigned Number {pizzaList.Count + 1}");
-            numberOfPizza = pizzaList.Count + 1;
-            Pizza pizza = new Pizza(numberOfPizza, nameOfPizza, priceOfPizza, toppings);
-            pizzaList.Add(pizza);
+            try
+            {
+                Console.WriteLine($"CREATE PIZZA");
+                Console.WriteLine($"____________");
+                Console.WriteLine($"Name Your Pizza:");
+                nameOfPizza = Console.ReadLine();
+                Console.WriteLine();
+                Console.WriteLine($"Set Price For Pizza::");
+                priceOfPizza = Convert.ToInt32(Console.ReadLine());
+                Console.WriteLine();
+                Console.WriteLine($"Add Your Toppings. Please seperate toppings with ',':");
+                toppings = Console.ReadLine();
+                Console.WriteLine($"You Have Now Created Your Pizza! Your Pizza Has Been Assigned Number {pizzaList.Count + 1}");
+                numberOfPizza = pizzaList.Count + 1;
+                Pizza pizza = new Pizza(numberOfPizza, nameOfPizza, priceOfPizza, toppings);
+                pizzaList.Add(pizza);
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Use Only Numbers When Setting A Price! Press Enter To Start Over");
+                Console.ReadKey();
+                Console.Clear();
+                CreatePizza();
+            }
+
         }
         #endregion
 
@@ -99,22 +121,50 @@ namespace UML_2_PizzaStore
             {
                 Console.WriteLine($"No.{pizza.NumberOfPizza} - {pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
             }
+
+            Console.WriteLine($"No Result - Please Try Again!");
+            Console.ReadKey();
+            Console.Clear();
+            UserMenu();
         }
         #endregion
 
-        #region Search For Pizza By Number
-        public void SearchForPizzaNumber(int numberOfPizza)
+        #region Update Pizza
+        public void UpdatePizza(int numberOfPizza)
         {
             var pizza = pizzaList.FirstOrDefault(pizza => pizza.NumberOfPizza == numberOfPizza);
-            if (pizza == null)
+            try
             {
-                Console.WriteLine($"Pizza Not Found");
+                if (pizza == null)
+                {
+                    Console.WriteLine($"Pizza Not Found");
+                }
+                else
+                {
+                    Console.WriteLine($"You Have Chosen Pizza No.{pizza.NumberOfPizza}");
+                    Console.WriteLine();
+                    Console.WriteLine("Enter New Name:");
+                    pizza.NameOfPizza = Console.ReadLine();
+                    Console.WriteLine();
+                    Console.WriteLine("Enter New Toppings:");
+                    pizza.NameOfPizza = Console.ReadLine();
+                    Console.WriteLine();
+                    Console.WriteLine($"Enter New Price:");
+                    pizza.PriceOfPizza = Convert.ToInt32(Console.ReadLine()); ;
+                    Console.WriteLine();
+                    Console.WriteLine("Succes! You Pizza Has Been Updated!");
+                }
             }
-            else
+            catch (System.FormatException)
             {
-                Console.WriteLine($"No.{pizza.NumberOfPizza} - {pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
+                Console.WriteLine("Use Only Numbers When Setting A Price! Press Enter To Start Over");
+                Console.ReadKey();
+                Console.Clear();
+                UpdatePizza(numberOfPizza);
             }
         }
+
+
 
         /*public void VisPizza(int nummer)
         {
@@ -133,7 +183,33 @@ namespace UML_2_PizzaStore
 
         #endregion
 
-        #endregion
+        #region Remove Pizza
+        public void RemovePizza(int numberOfPizza)
+        {
+            try
+            {
+                pizzaList.RemoveAt(numberOfPizza - 1);
+                Console.WriteLine($"Pizza No.{numberOfPizza} Has Been Removed From The Menu.");
+            }
+            catch (System.FormatException)
+            {
+                Console.WriteLine("Use Only Numbers When Choosing A Pizza To Remove! Press Enter To Start Over");
+                Console.ReadKey();
+                Console.Clear();
+                RemovePizza(numberOfPizza);
+            }
+            catch(System.ArgumentOutOfRangeException)
+            {
+                Console.WriteLine($"No Result - Please Try Again!");
+                Console.ReadKey();
+                Console.Clear();
+                UserMenu();
+            }
+
+            #endregion
+
+            #endregion
+        }
     }
 }
 
