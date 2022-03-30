@@ -6,9 +6,7 @@ namespace UML_2_PizzaStore
     {
         static void Main(string[] args)
         {
-            MenuCatalog menuCatalog = new MenuCatalog();
-            menuCatalog.PizzaList();
-            menuCatalog.RunApp();
+           new Store().Start();
         }
     }
 }
