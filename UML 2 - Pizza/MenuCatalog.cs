@@ -7,9 +7,13 @@ namespace UML_2_PizzaStore
 {
     public class MenuCatalog
     {
-
+        #region My List
         public List<Pizza> pizzaList = new List<Pizza>();
+        #endregion
 
+        #region My Methods
+
+        #region Pizza List
         public void PizzaList()
         {
             Pizza pizza1 = new Pizza(1, "Hawaii", 85, "Ham, Pineapple, Cheese");
@@ -23,8 +27,10 @@ namespace UML_2_PizzaStore
             pizzaList.Add(pizza4);
 
         }
+        #endregion
 
-        public void UserMenu()
+        #region Run App
+        public void RunApp()
         {
             Console.WriteLine("Welcome To The Menu!");
             Console.WriteLine();
@@ -36,33 +42,103 @@ namespace UML_2_PizzaStore
             Console.WriteLine("4. Search For A Pizza By Name!");
             Console.WriteLine("5. Remove Pizza From Menu!");
             Console.WriteLine("To Close Program Press 'x'");
+
+            var userinput = Console.ReadLine();
+         
+            while (true)
+
+            {
+                switch (userinput)
+                {
+                    case "1":
+                        Console.Clear();
+                        CreatePizza();
+                        break;
+
+                    case "2":
+                        Console.Clear();
+                        ShowFullMenu();
+                        break;
+
+                    case "3":
+                        Console.Clear();
+                        Console.WriteLine("Please Enter A Number To Display Specific Pizza:");
+                        int searchNumber = Convert.ToInt32(Console.ReadLine());
+                        SearchForPizzaNumber(searchNumber);
+                        break;
+
+                    case "4":
+                        Console.Clear();
+                        Console.WriteLine("Please Enter A Pizza Name Or Letters To Search For A Specific Pizza:");
+                        var searchPhrase = Console.ReadLine();
+                        SearchForPizza(searchPhrase);
+                        break;
+
+                    case "5":
+                        break;
+
+                    case "x":
+                        return;
+
+                    default:
+                        Console.WriteLine("Please Select Valid Option :-)");
+                        break;
+
+                }
+              
+                Console.WriteLine("~~~~~~~~~~~~~~~~~~~~~~~~~~~~");
+                Console.WriteLine();
+                Console.WriteLine("Please Select New Option!");
+                Console.WriteLine();
+                Console.WriteLine("1. Create A Pizza!");
+                Console.WriteLine("2. Show Full Menu!");
+                Console.WriteLine("3. Search For A Pizza By Number!");
+                Console.WriteLine("4. Search For A Pizza By Name!");
+                Console.WriteLine("5. Remove Pizza From Menu!");
+                Console.WriteLine("To Close Program Press 'x'");
+                userinput = Console.ReadLine();
+
+
+            }
+
+
         }
 
+   
+        #endregion
 
+        #region UserMenu
+        public void UserMenu()
+        {
+            Console.Clear();
+            Console.WriteLine("Welcome To The Menu!");
+            Console.WriteLine();
+            Console.WriteLine("Please Select An Option!");
+            Console.WriteLine();
+            Console.WriteLine("1. Create A Pizza!");
+            Console.WriteLine("2. Show Full Menu!");
+            Console.WriteLine("3. Search For A Pizza By Number!");
+            Console.WriteLine("4. Search For A Pizza By Name!");
+            Console.WriteLine("5. Remove Pizza From Menu!");
+            Console.WriteLine("To Close Program Press 'x'");
+        }
+        #endregion
+
+        #region Show Full Menu
         public void ShowFullMenu()
         {
-            string userChoice;
             Console.WriteLine("MENU");
             Console.WriteLine("~~~~");
            
             foreach (Pizza pizza in pizzaList)
             {
                 Console.WriteLine("______________________________________________________________________");
-                Console.WriteLine($"{pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
+                Console.WriteLine($"No.{pizza.NumberOfPizza} - {pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
             }
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Type 'y' To Show Options");
-            userChoice = Console.ReadLine();
-
-            if (userChoice == "y")
-            {
-                Console.Clear();
-                UserMenu();
-            }
-
         }
+        #endregion
 
+        #region Create Pizza
         public void CreatePizza()
         {
             string nameOfPizza;
@@ -84,91 +160,54 @@ namespace UML_2_PizzaStore
             numberOfPizza = pizzaList.Count + 1;
             Pizza pizza = new Pizza(numberOfPizza, nameOfPizza, priceOfPizza, toppings);
             pizzaList.Add(pizza);
-
-            string userChoice;
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("Type 'y' To Return To Option Menu");
-            userChoice = Console.ReadLine();
-
-            if (userChoice == "y")
-            {
-                Console.Clear();
-                UserMenu();
-            }
         }
+        #endregion
 
+        #region Search For Pizza By Name
         public void SearchForPizza(string searchPhrase)
         {
             var matchingPizzas = pizzaList.Where(pizza => pizza.NameOfPizza.Contains(searchPhrase)).ToList();
             foreach (Pizza pizza in matchingPizzas)
             {
-                Console.WriteLine($"{pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
+                Console.WriteLine($"No.{pizza.NumberOfPizza} - {pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
             }
         }
+        #endregion
 
-        public void SearchForTopping(string searchPhrase)
+        #region Search For Pizza By Number
+        public void SearchForPizzaNumber(int numberOfPizza)
         {
-            var matchingPizzas = pizzaList.Where(p => p.Toppings.Contains(searchPhrase)).ToList();
-            foreach (Pizza pizza in matchingPizzas)
+            var pizza = pizzaList.FirstOrDefault(pizza => pizza.NumberOfPizza == numberOfPizza);
+            if (pizza == null)
             {
-                Console.WriteLine($"{pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
+                Console.WriteLine($"Pizza Not Found");
+            }
+            else
+            {
+                Console.WriteLine($"No.{pizza.NumberOfPizza} - {pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
             }
         }
 
-    }
-}
-
-
-    
-
-  
-
-
-
-        /*List<Pizza> pizzalist = new List<Pizza>();
-
-        Pizza pizza1 = new Pizza("Hawaii", 80);
-        Pizza pizza2 = new Pizza("Veggie", 75);
-        Pizza pizza3 = new Pizza("House Special", 90);
-        Pizza pizza4 = new Pizza("Capricosa", 60);
-
-        MenuCatalog()
+        /*public void VisPizza(int nummer)
         {
-            pizzalist.Add(pizza1);
-            pizzalist.Add(pizza2);
-            pizzalist.Add(pizza3);
-            pizzalist.Add(pizza4);
+            var pizza = pizzaer.FirstOrDefault(p => p._nummer == nummer);
+            if (pizza == null)
+            {
+                Console.WriteLine("Pizza ikke fundet");
+            }
+            else
+            {
+                Console.WriteLine();
+                VisPizzaDetaljer(pizza);
+            }
         }
-
-        public void PrintMenu()
-        {
-            Console.WriteLine(pizzalist);
-        }
-
-
-        /*AuthorList.Add(new Author("Neel Beniwal", 18, "Graphics Development with C#", false, new DateTime(2010, 2, 22)));
-        AuthorList.Add(new Author("Praveen Kumar", 28, "Mastering WCF", true, new DateTime(2012, 01, 01)));
-        AuthorList.Add(new Author("Mahesh Chand", 35, "Graphics Programming with GDI+", true, new DateTime(2008, 01, 20)));
-        AuthorList.Add(new Author("Raj Kumar", 30, "Building Creative Systems", false, new DateTime(2011, 6, 3)));
         */
 
-
-        #region Instance Fields
-
-
-
-
         #endregion
 
-        #region Constructor
         #endregion
-
-        #region Properties 
-        #endregion
-
-        #region Methods
-        #endregion
+    }
+}
 
 
     
