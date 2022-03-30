@@ -1,4 +1,5 @@
 ﻿using System;
+using UML_2___Pizza;
 
 namespace UML_2_PizzaStore
 {
@@ -11,10 +12,12 @@ namespace UML_2_PizzaStore
 
         public void RunApp()
         {
+            CustomerCatalog customerCatalog = new CustomerCatalog();
             MenuCatalog menuCatalog = new MenuCatalog();
             menuCatalog.UserMenu();
             var userinput = Console.ReadLine();
             menuCatalog.PizzaList();
+            customerCatalog.CustomerList();
 
             while (true)
 
@@ -63,10 +66,44 @@ namespace UML_2_PizzaStore
                         break;
 
                     case "6":
-                
+                        Console.Clear();
+                        try
+                        {
+                            customerCatalog.CreateCustomer();
+                        }
+                        catch (Exception)
+                        {
+                            Console.WriteLine($"No Customer Was Created");
+                        }
                         break;
 
                     case "7":
+                        Console.Clear();
+                        customerCatalog.AllCustomers();
+                        break;
+
+                    case "8":
+                        Console.Clear();
+                        Console.WriteLine("Choose The Number Of The Customer You Want To Update!");
+                        customerCatalog.AllCustomers();
+                        Console.WriteLine();
+                        int numberOfCustomer = Convert.ToInt32(Console.ReadLine());
+                        customerCatalog.UpdateCustomer(numberOfCustomer);
+                        break;
+
+                    case "9":
+                        Console.Clear();
+                        Console.WriteLine("Please Enter A Customer Name Or Letters To Search For A Specific Customer:");
+                        var search = Console.ReadLine();
+                        customerCatalog.SearchForCustomer(search);
+                        break;
+
+                    case "10":
+                        Console.Clear();
+                        Console.WriteLine("Please Choose The Number Of The Customer You Want To Remove From The Customer Catalog:");
+                        customerCatalog.AllCustomers();
+                        int numberCustomer = Convert.ToInt32(Console.ReadLine());
+                        customerCatalog.RemoveCustomer(numberCustomer);
                         break;
 
                     case "x":
@@ -77,7 +114,6 @@ namespace UML_2_PizzaStore
                         break;
 
                 }
-                
                 Console.WriteLine();
                 Console.WriteLine();
                 Console.WriteLine("Press 'o' To Return To Menu!");

@@ -29,12 +29,6 @@ namespace UML_2_PizzaStore
         }
         #endregion
 
-        #region Run App
-
-
-
-        #endregion
-
         #region UserMenu
         public void UserMenu()
         {
@@ -147,7 +141,7 @@ namespace UML_2_PizzaStore
                     pizza.NameOfPizza = Console.ReadLine();
                     Console.WriteLine();
                     Console.WriteLine("Enter New Toppings:");
-                    pizza.NameOfPizza = Console.ReadLine();
+                    pizza.Toppings = Console.ReadLine();
                     Console.WriteLine();
                     Console.WriteLine($"Enter New Price:");
                     pizza.PriceOfPizza = Convert.ToInt32(Console.ReadLine()); ;
