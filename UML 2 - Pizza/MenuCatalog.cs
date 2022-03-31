@@ -157,24 +157,6 @@ namespace UML_2_PizzaStore
                 UpdatePizza(numberOfPizza);
             }
         }
-
-
-
-        /*public void VisPizza(int nummer)
-        {
-            var pizza = pizzaer.FirstOrDefault(p => p._nummer == nummer);
-            if (pizza == null)
-            {
-                Console.WriteLine("Pizza ikke fundet");
-            }
-            else
-            {
-                Console.WriteLine();
-                VisPizzaDetaljer(pizza);
-            }
-        }
-        */
-
         #endregion
 
         #region Remove Pizza
