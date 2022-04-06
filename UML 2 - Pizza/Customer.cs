@@ -20,7 +20,7 @@ namespace UML_2___Pizza
         #endregion
 
         #region Constructor
-        public Customer(int numberOfCustomer, string nameOfCustomer, string customerCity, int customerPostalCode, string customerStreetName, int customerHouseNumber,  int phoneNumberOfCustomer, string emailOfCustomer)
+        public Customer(int numberOfCustomer, string nameOfCustomer, string customerCity, int customerPostalCode, string customerStreetName, int customerHouseNumber, int phoneNumberOfCustomer, string emailOfCustomer)
         {
             _numberOfCustomer = numberOfCustomer;
             _nameOfCustomer = nameOfCustomer;
@@ -85,9 +85,5 @@ namespace UML_2___Pizza
 
         #endregion
 
-        #region Methods
-        #endregion
-
     }
 }
-

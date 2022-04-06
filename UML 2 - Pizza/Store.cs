@@ -18,7 +18,7 @@ namespace UML_2_PizzaStore
             var userinput = Console.ReadLine();
             menuCatalog.PizzaList();
             customerCatalog.CustomerList();
-
+ 
             while (true)
 
             {
@@ -30,7 +30,7 @@ namespace UML_2_PizzaStore
                         {
                             menuCatalog.CreatePizza();
                         }
-                        catch(Exception)
+                        catch (Exception)
                         {
                             Console.WriteLine($"No Pizza Was Created");
                         }
@@ -131,4 +131,3 @@ namespace UML_2_PizzaStore
 
     }
 }
-

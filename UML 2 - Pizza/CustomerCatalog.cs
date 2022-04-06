@@ -13,6 +13,8 @@ namespace UML_2___Pizza
         public List<Customer> customerList = new List<Customer>();
         #endregion
 
+        #region My Methods
+
         #region Customer List
         public void CustomerList()
         {
@@ -94,93 +96,85 @@ namespace UML_2___Pizza
         #region Search For Customer
         public void SearchForCustomer(string search)
         {
-            var matchingCustomers = customerList.Where(customer => customer.NameOfCustomer.Contains(search)).ToList();
-            foreach (Customer customer in matchingCustomers)
-            {
+                var matchingCustomers = customerList.Where(customer => customer.NameOfCustomer.Contains(search)).ToList();
+                foreach (Customer customer in matchingCustomers)
+                { 
                 Console.WriteLine($"Customer No.{customer.NumberOfCustomer} - Name: {customer.NameOfCustomer} - Phone Number: {customer.PhoneNumberOfCustomer} - Address: {customer.CustomerStreetName} {customer.CustomerHouseNumber}, {customer.CustomerCity} {customer.CustomerPostalCode}");
-            }
-
-            Console.WriteLine($"No Result - Please Try Again!");
-            Console.ReadKey();
-            Console.Clear();
-            MenuCatalog menuCatalog = new MenuCatalog();
-            menuCatalog.UserMenu();
-
+                }
+            Console.WriteLine("Didn't Find What You Were Looking For? Return To Menu And Try Again!");
         }
-        #endregion
+
+            #endregion
 
         #region Update Customer
         public void UpdateCustomer(int numberOfCustomer)
-        {
-            var customer = customerList.FirstOrDefault(customer => customer.NumberOfCustomer == numberOfCustomer);
-            try
             {
-                if (customer == null)
+                var customer = customerList.FirstOrDefault(customer => customer.NumberOfCustomer == numberOfCustomer);
+                try
                 {
-                    Console.WriteLine($"Customer Not Found");
+                    if (customer == null)
+                    {
+                        Console.WriteLine($"Customer Not Found");
+                    }
+                    else
+                    {
+                        Console.WriteLine($"You Have Chosen Customer No.{customer.NumberOfCustomer}");
+                        Console.WriteLine();
+                        Console.WriteLine("Enter New Full Name:");
+                        customer.NameOfCustomer = Console.ReadLine();
+                        Console.WriteLine();
+                        Console.WriteLine("Enter Phone Number:");
+                        customer.PhoneNumberOfCustomer = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine();
+                        Console.WriteLine($"Enter Street Name And House Number:");
+                        customer.CustomerStreetName = Console.ReadLine();
+                        customer.CustomerHouseNumber = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine();
+                        Console.WriteLine($"Enter City And Postal Code:");
+                        customer.CustomerCity = Console.ReadLine();
+                        customer.CustomerPostalCode = Convert.ToInt32(Console.ReadLine());
+                        Console.WriteLine();
+                        Console.WriteLine("Succes! Your Customer Has Been Updated!");
+                    }
                 }
-                else
+                catch (System.FormatException)
                 {
-                    Console.WriteLine($"You Have Chosen Customer No.{customer.NumberOfCustomer}");
-                    Console.WriteLine();
-                    Console.WriteLine("Enter New Full Name:");
-                    customer.NameOfCustomer = Console.ReadLine();
-                    Console.WriteLine();
-                    Console.WriteLine("Enter Phone Number:");
-                    customer.PhoneNumberOfCustomer = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine();
-                    Console.WriteLine($"Enter Street Name And House Number:");
-                    customer.CustomerStreetName = Console.ReadLine();
-                    customer.CustomerHouseNumber = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine();
-                    Console.WriteLine($"Enter City And Postal Code:");
-                    customer.CustomerCity = Console.ReadLine();
-                    customer.CustomerPostalCode = Convert.ToInt32(Console.ReadLine());
-                    Console.WriteLine();
-                    Console.WriteLine("Succes! Your Customer Has Been Updated!");
+                    Console.WriteLine("Use Only Numbers When Setting A Price! Press Enter To Start Over");
+                    Console.ReadKey();
+                    Console.Clear();
+                    UpdateCustomer(numberOfCustomer);
                 }
-            }
-            catch (System.FormatException)
-            {
-                Console.WriteLine("Use Only Numbers When Setting A Price! Press Enter To Start Over");
-                Console.ReadKey();
-                Console.Clear();
-                UpdateCustomer(numberOfCustomer);
-            }
 
-        }
-        #endregion
+            }
+            #endregion
 
         #region Remove Customer
-        public void RemoveCustomer(int numberOfCustomer)
-        {
-            try
+            public void RemoveCustomer(int numberOfCustomer)
             {
-                customerList.RemoveAt(numberOfCustomer - 1);
-                Console.WriteLine($"Customer No.{numberOfCustomer} Has Been Removed From The Customer Catalog");
-            }
-            catch (System.FormatException)
-            {
-                Console.WriteLine("Use Only Numbers When Choosing A Customer To Remove! Press Enter To Start Over");
-                Console.ReadKey();
-                Console.Clear();
-                RemoveCustomer(numberOfCustomer);
-            }
-            catch (System.ArgumentOutOfRangeException)
-            {
-                Console.WriteLine($"No Result - Please Try Again!");
-                Console.ReadKey();
-                Console.Clear();
-                MenuCatalog menuCatalog = new MenuCatalog();
-                menuCatalog.UserMenu();
+                try
+                {
+                    customerList.RemoveAt(numberOfCustomer - 1);
+                    Console.WriteLine($"Customer No.{numberOfCustomer} Has Been Removed From The Customer Catalog");
+                }
+                catch (System.FormatException)
+                {
+                    Console.WriteLine("Use Only Numbers When Choosing A Customer To Remove! Press Enter To Start Over");
+                    Console.ReadKey();
+                    Console.Clear();
+                    RemoveCustomer(numberOfCustomer);
+                }
+                catch (System.ArgumentOutOfRangeException)
+                {
+                    Console.WriteLine($"No Result - Please Try Again!");
+                    Console.ReadKey();
+                    Console.Clear();
+                    MenuCatalog menuCatalog = new MenuCatalog();
+                    menuCatalog.UserMenu();
+                }
+                #endregion
             }
             #endregion
         }
     }
-    }
 
 
-    
-    
-
-    

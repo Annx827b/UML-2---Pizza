@@ -42,7 +42,7 @@ namespace UML_2_PizzaStore
             Console.WriteLine("1. Create A Pizza!");
             Console.WriteLine("2. Show Full Menu!");
             Console.WriteLine("3. Update A Pizza!");
-            Console.WriteLine("4. Search For A Pizza By Name!");
+            Console.WriteLine("4. Search For A Pizza!");
             Console.WriteLine("5. Remove Pizza From Menu!");
             Console.WriteLine();
             Console.WriteLine("COSTUMERS");
@@ -51,7 +51,7 @@ namespace UML_2_PizzaStore
             Console.WriteLine("7. Show All Customers!");
             Console.WriteLine("8. Update Customer Info!");
             Console.WriteLine("9. Search For A Customer!");
-            Console.WriteLine("10. Remove A Customer!");
+            Console.WriteLine("10.Remove A Customer!");
             Console.WriteLine();
             Console.WriteLine("To Close Program Press 'x'");
         }
@@ -107,7 +107,7 @@ namespace UML_2_PizzaStore
         }
         #endregion
 
-        #region Search For Pizza By Name
+        #region Search For Pizza
         public void SearchForPizza(string searchPhrase)
         {
             var matchingPizzas = pizzaList.Where(pizza => pizza.NameOfPizza.Contains(searchPhrase)).ToList();
@@ -115,11 +115,7 @@ namespace UML_2_PizzaStore
             {
                 Console.WriteLine($"No.{pizza.NumberOfPizza} - {pizza.NameOfPizza} - ({pizza.Toppings}) - {pizza.PriceOfPizza} DKK");
             }
-
-            Console.WriteLine($"No Result - Please Try Again!");
-            Console.ReadKey();
-            Console.Clear();
-            UserMenu();
+            Console.WriteLine("Didn't Find What You Were Looking For? Return To Menu And Try Again!");
         }
         #endregion
 
@@ -127,6 +123,7 @@ namespace UML_2_PizzaStore
         public void UpdatePizza(int numberOfPizza)
         {
             var pizza = pizzaList.FirstOrDefault(pizza => pizza.NumberOfPizza == numberOfPizza);
+
             try
             {
                 if (pizza == null)

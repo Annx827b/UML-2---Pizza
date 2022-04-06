@@ -7,12 +7,10 @@ namespace UML_2_PizzaStore
     public class Pizza 
     {
         #region Instance Fields
-
         private int _numberOfPizza;
         private string _nameOfPizza;
         private double _priceOfPizza;
         private string _toppings;
-
         #endregion
 
         #region Constructor
@@ -27,7 +25,6 @@ namespace UML_2_PizzaStore
         #endregion
 
         #region Properties
-
         public int NumberOfPizza
         {
             get { return _numberOfPizza; }
@@ -51,17 +48,7 @@ namespace UML_2_PizzaStore
             get { return _toppings; }
             set { _toppings = value; }
         }
-
-        #endregion
-
-        #region Methods
-        #endregion
-
-        public override string ToString()
-        {
-            return $"No. {NumberOfPizza} - {NameOfPizza} - ({Toppings}) - {PriceOfPizza} DKK";
-        }
-        
+        #endregion  
 
     }
 }
