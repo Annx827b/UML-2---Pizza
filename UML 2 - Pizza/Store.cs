@@ -45,9 +45,23 @@ namespace UML_2_PizzaStore
                         Console.Clear();
                         Console.WriteLine("Choose The Number Of The Pizza You Want To Update!");
                         Console.WriteLine();
-                        menuCatalog.ShowFullMenu();
-                        int numberOfPizza = Convert.ToInt32(Console.ReadLine());
-                        menuCatalog.UpdatePizza(numberOfPizza);
+                        try
+                        {
+                            menuCatalog.ShowFullMenu();
+                            int numberOfPizza = Convert.ToInt32(Console.ReadLine());
+                            menuCatalog.UpdatePizza(numberOfPizza);
+                        }
+                        catch(System.FormatException)
+                        {
+                            Console.WriteLine("Use Only Numbers When Choosing A Pizza To Update!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            Console.WriteLine("Choose The Number Of The Pizza You Want To Update!");
+                            Console.WriteLine();
+                            menuCatalog.ShowFullMenu();
+                            int numberOfPizza = Convert.ToInt32(Console.ReadLine());
+                            menuCatalog.UpdatePizza(numberOfPizza);
+                        }
                         break;
 
                     case "4":
@@ -58,11 +72,25 @@ namespace UML_2_PizzaStore
                         break;
 
                     case "5":
-                        Console.Clear();
-                        Console.WriteLine("Please Choose The Number Of The Pizza You Want To Remove From The Menu:");
-                        menuCatalog.ShowFullMenu();
-                        int pizzaNumber = Convert.ToInt32(Console.ReadLine());
-                        menuCatalog.RemovePizza(pizzaNumber);
+                        try
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please Choose The Number Of The Pizza You Want To Remove From The Menu:");
+                            menuCatalog.ShowFullMenu();
+                            int pizzaNumber = Convert.ToInt32(Console.ReadLine());
+                            menuCatalog.RemovePizza(pizzaNumber);
+                        }
+                        catch(System.FormatException)
+                        {
+                            Console.WriteLine("Use Only Numbers When Choosing A Pizza To Remove!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            Console.WriteLine("Please Choose The Number Of The Pizza You Want To Remove From The Menu:");
+                            Console.WriteLine();
+                            menuCatalog.ShowFullMenu();
+                            int numberOfPizza = Convert.ToInt32(Console.ReadLine());
+                            menuCatalog.RemovePizza(numberOfPizza);
+                        }
                         break;
 
                     case "6":
@@ -83,12 +111,26 @@ namespace UML_2_PizzaStore
                         break;
 
                     case "8":
-                        Console.Clear();
-                        Console.WriteLine("Choose The Number Of The Customer You Want To Update!");
-                        customerCatalog.AllCustomers();
-                        Console.WriteLine();
-                        int numberOfCustomer = Convert.ToInt32(Console.ReadLine());
-                        customerCatalog.UpdateCustomer(numberOfCustomer);
+                        try
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Choose The Number Of The Customer You Want To Update!");
+                            customerCatalog.AllCustomers();
+                            Console.WriteLine();
+                            int numberOfCustomer = Convert.ToInt32(Console.ReadLine());
+                            customerCatalog.UpdateCustomer(numberOfCustomer);
+                        }
+                        catch (System.FormatException)
+                        {
+                            Console.WriteLine("Use Only Numbers When Choosing A Customer To Update!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            Console.WriteLine("Please Choose The Number Of The Customer You Want To Update");
+                            Console.WriteLine();
+                            customerCatalog.AllCustomers();
+                            int numberOfCustomer = Convert.ToInt32(Console.ReadLine());
+                            customerCatalog.UpdateCustomer(numberOfCustomer);
+                        }
                         break;
 
                     case "9":
@@ -99,11 +141,25 @@ namespace UML_2_PizzaStore
                         break;
 
                     case "10":
-                        Console.Clear();
-                        Console.WriteLine("Please Choose The Number Of The Customer You Want To Remove From The Customer Catalog:");
-                        customerCatalog.AllCustomers();
-                        int numberCustomer = Convert.ToInt32(Console.ReadLine());
-                        customerCatalog.RemoveCustomer(numberCustomer);
+                        try
+                        {
+                            Console.Clear();
+                            Console.WriteLine("Please Choose The Number Of The Customer You Want To Remove From The Customer Catalog:");
+                            customerCatalog.AllCustomers();
+                            int numberCustomer = Convert.ToInt32(Console.ReadLine());
+                            customerCatalog.RemoveCustomer(numberCustomer);
+                        }
+                        catch(System.FormatException)
+                        {
+                            Console.WriteLine("Use Only Numbers When Choosing A Customer To Remove!");
+                            Console.ReadKey();
+                            Console.Clear();
+                            Console.WriteLine("Please Choose The Number Of The Customer You Want To Remove");
+                            Console.WriteLine();
+                            customerCatalog.AllCustomers();
+                            int numberOfCustomer = Convert.ToInt32(Console.ReadLine());
+                            customerCatalog.RemoveCustomer(numberOfCustomer);
+                        }
                         break;
 
                     case "x":

@@ -109,7 +109,7 @@ namespace UML_2_PizzaStore
 
         #region Search For Pizza
         public void SearchForPizza(string searchPhrase)
-        {
+        { 
             var matchingPizzas = pizzaList.Where(pizza => pizza.NameOfPizza.Contains(searchPhrase)).ToList();
             foreach (Pizza pizza in matchingPizzas)
             {
@@ -121,9 +121,8 @@ namespace UML_2_PizzaStore
 
         #region Update Pizza
         public void UpdatePizza(int numberOfPizza)
-        {
+        { 
             var pizza = pizzaList.FirstOrDefault(pizza => pizza.NumberOfPizza == numberOfPizza);
-
             try
             {
                 if (pizza == null)
